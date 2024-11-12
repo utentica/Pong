@@ -1,0 +1,146 @@
+[gd_scene load_steps=8 format=3 uid="uid://b37kor4u3bvg7"]
+
+[ext_resource type="Script" path="res://Main_menu/multiplayer_menu.gd" id="1_7nopy"]
+[ext_resource type="Texture2D" uid="uid://daxwi5q5acq10" path="res://pong_assets/iLikeMyCheeseCrippyBruh.png" id="2_ft033"]
+[ext_resource type="FontFile" uid="uid://cklq7msrqwa31" path="res://pong_assets/Orbitron-Bold.ttf" id="3_7de8k"]
+[ext_resource type="FontFile" uid="uid://cbfok423khf8i" path="res://pong_assets/Orbitron-Medium.ttf" id="4_h4xg5"]
+[ext_resource type="AudioStream" uid="uid://c2rwx3gwytwt3" path="res://pong_assets/ping_pong_8bit_beeep.ogg" id="5_us7lb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nmmst"]
+font = ExtResource("3_7de8k")
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_eqnxh"]
+font = ExtResource("4_h4xg5")
+shadow_size = 0
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7nopy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ft033")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -134.0
+offset_right = 134.0
+offset_bottom = 226.0
+grow_horizontal = 2
+size_flags_vertical = 3
+text = "Multiplayer"
+label_settings = SubResource("LabelSettings_nmmst")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -52.5
+offset_bottom = 52.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Left Margin" type="VSplitContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Player 1" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Player 1"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerNameField" type="TextEdit" parent="HBoxContainer/Player 1/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+placeholder_text = "Player1 Name"
+
+[node name="Label" type="Label" parent="HBoxContainer/Player 1/VBoxContainer"]
+layout_mode = 2
+text = "Pick a color"
+label_settings = SubResource("LabelSettings_eqnxh")
+horizontal_alignment = 1
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="HBoxContainer/Player 1/VBoxContainer"]
+layout_mode = 2
+text = "GYAT"
+color = Color(1, 0, 0, 1)
+
+[node name="PlayButton" type="Button" parent="HBoxContainer/Player 1/VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="Margin Mid" type="VSplitContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Player 2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Player 2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerNameField2" type="TextEdit" parent="HBoxContainer/Player 2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+placeholder_text = "Player2 Name"
+
+[node name="Label" type="Label" parent="HBoxContainer/Player 2/VBoxContainer"]
+layout_mode = 2
+text = "Pick a color"
+label_settings = SubResource("LabelSettings_eqnxh")
+horizontal_alignment = 1
+
+[node name="ColorPickerButton2" type="ColorPickerButton" parent="HBoxContainer/Player 2/VBoxContainer"]
+layout_mode = 2
+text = "GYAT"
+color = Color(1, 0, 0, 1)
+
+[node name="QuitButton" type="Button" parent="HBoxContainer/Player 2/VBoxContainer"]
+layout_mode = 2
+text = "Return"
+
+[node name="Margin RIght" type="VSplitContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+
+[node name="ClickedButton" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_us7lb")
+volume_db = 11.0
+
+[connection signal="color_changed" from="HBoxContainer/Player 1/VBoxContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
+[connection signal="pressed" from="HBoxContainer/Player 1/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="color_changed" from="HBoxContainer/Player 2/VBoxContainer/ColorPickerButton2" to="." method="_on_color_picker_button_2_color_changed"]
+[connection signal="pressed" from="HBoxContainer/Player 2/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

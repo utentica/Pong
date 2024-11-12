@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c1xwfel1es38l"
+path="res://.godot/imported/MANGOS TIKTOK VERSION (PHONK).mp3-95042e28352da4c9d4bf3399a5f14522.mp3str"
+
+[deps]
+
+source_file="res://pong_assets/MANGOS TIKTOK VERSION (PHONK).mp3"
+dest_files=["res://.godot/imported/MANGOS TIKTOK VERSION (PHONK).mp3-95042e28352da4c9d4bf3399a5f14522.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

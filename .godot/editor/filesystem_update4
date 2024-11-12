@@ -1,0 +1,12 @@
+res://Paddles/player_paddle.tscn
+res://Paddles/player2_paddle.tscn
+res://Paddles/Opponent.tscn
+res://Ball/ball.tscn
+res://Levels/level.tscn
+res://Levels/multiplayer.tscn
+res://Main_menu/main_menu.tscn
+res://Main_menu/multiplayer_menu.tscn
+res://Main_menu/difficulty_menu.tscn
+res://Settings/settings.tscn
+res://Main_menu/winner_screen.tscn
+res://Settings/settings.gd

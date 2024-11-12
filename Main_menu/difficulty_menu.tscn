@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3 uid="uid://r2qea6pmrwy4"]
+
+[ext_resource type="Script" path="res://Main_menu/difficulty_menu.gd" id="1_0xip1"]
+[ext_resource type="Texture2D" uid="uid://daxwi5q5acq10" path="res://pong_assets/iLikeMyCheeseCrippyBruh.png" id="2_wea5e"]
+[ext_resource type="FontFile" uid="uid://cklq7msrqwa31" path="res://pong_assets/Orbitron-Bold.ttf" id="3_1m4pn"]
+[ext_resource type="AudioStream" uid="uid://c2rwx3gwytwt3" path="res://pong_assets/ping_pong_8bit_beeep.ogg" id="4_1r2i4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nmmst"]
+font = ExtResource("3_1m4pn")
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0xip1")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wea5e")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Choose your Difficulty"
+label_settings = SubResource("LabelSettings_nmmst")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerNameField" type="TextEdit" parent="VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+placeholder_text = "Enter your name!"
+
+[node name="EasyButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Easy"
+
+[node name="MediumButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Medium"
+
+[node name="HardButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Hard"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+
+[node name="ClickedButton" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_1r2i4")
+volume_db = 11.0
+
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/EasyButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/EasyButton" to="." method="_on_easy_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/MediumButton" to="." method="_on_medium_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/HardButton" to="." method="_on_hard_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

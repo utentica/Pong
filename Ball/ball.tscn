@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqjhegqenl57n"]
+
+[ext_resource type="Script" path="res://Ball/ball.gd" id="1_5adxa"]
+[ext_resource type="Texture2D" uid="uid://bvkmjfrjhyjhc" path="res://pong_assets/Ball.png" id="1_te5wn"]
+[ext_resource type="AudioStream" uid="uid://djv48uvu0crg8" path="res://pong_assets/Metal pipe falling sound effect but its more violent.mp3" id="3_2gc5g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cx4ns"]
+radius = 17.0
+
+[node name="Ball" type="CharacterBody2D"]
+script = ExtResource("1_5adxa")
+speed = 450
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cx4ns")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+texture = ExtResource("1_te5wn")
+
+[node name="CollisionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_2gc5g")
+volume_db = -4.0
+max_polyphony = 2

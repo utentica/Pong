@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://buk1d0hat8t2r"]
+
+[ext_resource type="Script" path="res://Main_menu/main_menu.gd" id="1_hb03s"]
+[ext_resource type="Texture2D" uid="uid://daxwi5q5acq10" path="res://pong_assets/iLikeMyCheeseCrippyBruh.png" id="2_gugjd"]
+[ext_resource type="FontFile" uid="uid://cklq7msrqwa31" path="res://pong_assets/Orbitron-Bold.ttf" id="3_dvtus"]
+[ext_resource type="AudioStream" uid="uid://c2rwx3gwytwt3" path="res://pong_assets/ping_pong_8bit_beeep.ogg" id="4_18qte"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nmmst"]
+font = ExtResource("3_dvtus")
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hb03s")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gugjd")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "SKIBIDI PONG"
+label_settings = SubResource("LabelSettings_nmmst")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StartGameButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Select Difficulty"
+
+[node name="MultiplayerButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Multiplayer"
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+
+[node name="ClickedButton" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_18qte")
+volume_db = 11.0
+
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/MultiplayerButton" to="." method="_on_multiplayer_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

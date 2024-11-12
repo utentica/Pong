@@ -1,0 +1,14 @@
+CheckBox
+TextEdit
+HBoxContainer
+AudioStreamPlayer
+Button
+Label
+ColorPickerButton
+VSplitContainer
+HSplitContainer
+TextureRect
+AudioStreamPlayer2D
+ColorRect
+VBoxContainer
+Timer

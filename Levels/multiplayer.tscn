@@ -1,0 +1,181 @@
+[gd_scene load_steps=16 format=3 uid="uid://402tchxs5xlu"]
+
+[ext_resource type="Script" path="res://Levels/multiplayer.gd" id="1_obxc2"]
+[ext_resource type="FontFile" uid="uid://cbfok423khf8i" path="res://pong_assets/Orbitron-Medium.ttf" id="3_vydl3"]
+[ext_resource type="FontFile" uid="uid://cklq7msrqwa31" path="res://pong_assets/Orbitron-Bold.ttf" id="4_hiuwy"]
+[ext_resource type="PackedScene" uid="uid://87dp3m2mr2en" path="res://Paddles/player_paddle.tscn" id="5_2ulji"]
+[ext_resource type="PackedScene" uid="uid://dqjhegqenl57n" path="res://Ball/ball.tscn" id="6_otr52"]
+[ext_resource type="AudioStream" uid="uid://c2rwx3gwytwt3" path="res://pong_assets/ping_pong_8bit_beeep.ogg" id="8_86osi"]
+[ext_resource type="PackedScene" uid="uid://bqgfn16l3pynl" path="res://Paddles/player2_paddle.tscn" id="8_m1ybk"]
+
+[sub_resource type="Gradient" id="Gradient_8ycwu"]
+offsets = PackedFloat32Array(0, 0.62987, 1)
+colors = PackedColorArray(0.341176, 0.027451, 0.584314, 1, 0.121569, 0.341176, 0.435294, 1, 0.0357056, 0.46369, 0.507813, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c67oi"]
+gradient = SubResource("Gradient_8ycwu")
+fill_to = Vector2(1, 0.123853)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cx5or"]
+font = ExtResource("3_vydl3")
+font_size = 40
+font_color = Color(0.783523, 0.783523, 0.783523, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_neust"]
+font = ExtResource("3_vydl3")
+font_size = 40
+font_color = Color(0.784314, 0.784314, 0.784314, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7rp00"]
+font = ExtResource("4_hiuwy")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_a8q01"]
+font = ExtResource("3_vydl3")
+font_size = 30
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ai83"]
+size = Vector2(1285, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6837c"]
+size = Vector2(85, 640)
+
+[node name="Level" type="Node"]
+script = ExtResource("1_obxc2")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+autoplay = true
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_c67oi")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="PlayerScore" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_cx5or")
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 150
+
+[node name="OpponentScore" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_neust")
+
+[node name="CountdownLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -109.5
+offset_right = 109.5
+offset_bottom = 48.0
+grow_horizontal = 2
+text = "Countdown"
+label_settings = SubResource("LabelSettings_7rp00")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerName" type="Label" parent="."]
+offset_right = 298.0
+offset_bottom = 60.0
+text = "Player Name"
+label_settings = SubResource("LabelSettings_a8q01")
+
+[node name="PlayerName2" type="Label" parent="."]
+offset_left = 850.0
+offset_top = 3.0
+offset_right = 1148.0
+offset_bottom = 63.0
+text = "Player Name"
+label_settings = SubResource("LabelSettings_a8q01")
+horizontal_alignment = 2
+
+[node name="PlayerPaddle" parent="." instance=ExtResource("5_2ulji")]
+position = Vector2(15, 324)
+
+[node name="WallTop" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop"]
+position = Vector2(560, -10)
+shape = SubResource("RectangleShape2D_8ai83")
+
+[node name="WallTop2" type="StaticBody2D" parent="."]
+position = Vector2(0, 670)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop2"]
+position = Vector2(560, -10)
+shape = SubResource("RectangleShape2D_8ai83")
+
+[node name="Ball" parent="." instance=ExtResource("6_otr52")]
+position = Vector2(576, 324)
+
+[node name="WallLeft" type="Area2D" parent="."]
+position = Vector2(-80, 91)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft"]
+position = Vector2(32.5, 233)
+shape = SubResource("RectangleShape2D_6837c")
+
+[node name="WallRight" type="Area2D" parent="."]
+position = Vector2(1168, 91)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight"]
+position = Vector2(32.5, 233)
+shape = SubResource("RectangleShape2D_6837c")
+
+[node name="CountdownTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="ScoreSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_86osi")
+
+[node name="Opponent" parent="." instance=ExtResource("8_m1ybk")]
+position = Vector2(1133, 334)
+
+[node name="UnpauseButton" type="Button" parent="."]
+process_mode = 3
+visible = false
+anchors_preset = -1
+anchor_left = 0.369792
+anchor_top = 0.287037
+anchor_right = 0.630208
+anchor_bottom = 0.712963
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Unpause"
+metadata/_edit_use_anchors_ = true
+
+[node name="GameTime" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="WallLeft" to="." method="_on_wall_left_body_entered"]
+[connection signal="body_entered" from="WallRight" to="." method="_on_wall_right_body_entered"]
+[connection signal="timeout" from="CountdownTimer" to="." method="_on_countdown_timer_timeout"]
+[connection signal="pressed" from="UnpauseButton" to="." method="_on_unpause_button_pressed"]
+[connection signal="timeout" from="GameTime" to="." method="_on_game_time_timeout"]
